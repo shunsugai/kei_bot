@@ -1,6 +1,6 @@
 require 'sinatra/activerecord'
 require 'sinatra/activerecord/rake'
-require './greeting.rb'
+require './model.rb'
 
 task :create do
   File.open('kei_bot_hello.txt') do |tweet|
