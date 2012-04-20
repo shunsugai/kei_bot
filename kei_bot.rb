@@ -18,11 +18,10 @@ class KeiBot
     t = Time.now.hour
 
     if t == 12
-      tweet = "#{random_tweet(Greeting)}。#{jpn_wday}曜日で四男の慧です。"
-      return tweet
+      return "#{random_tweet(Greeting, :greeting)}。#{jpn_wday}曜日で四男の慧です。"
     end
 
-    random_tweet(Tweet)
+    random_tweet(Tweet, :tweet)
   end
 
   private
@@ -32,7 +31,7 @@ class KeiBot
     jpn_wday[i]
   end
 
-  def random_tweet(model)
+  def random_tweet(model, accessor)
     selected_tweet = model.where(:done => false).sample
 
     unless selected_tweet
@@ -42,7 +41,8 @@ class KeiBot
 
     selected_tweet.done = true
     selected_tweet.save
-    return selected_tweet.tweet
+    
+    selected_tweet.send(accessor)
   end
 
   def reset_tweets
