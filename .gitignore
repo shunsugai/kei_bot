@@ -2,3 +2,4 @@
 .bundle
 vendor/bundle
 *.db
+config/local_env.rb
