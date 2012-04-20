@@ -36,7 +36,7 @@ class KeiBot
 
     unless selected_tweet
       reset_tweets
-      random_tweet(model)
+      random_tweet(model, accessor)
     end
 
     selected_tweet.done = true
