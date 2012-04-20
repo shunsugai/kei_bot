@@ -1,8 +1,7 @@
 #coding: utf-8
 
 require 'twitter'
-require './tweet.rb'
-require './greeting.rb'
+require './model.rb'
 require './config/local_env.rb' unless ENV['OAUTH_TOKEN_SECRET']
 
 class KeiBot
@@ -19,10 +18,10 @@ class KeiBot
     t = Time.now.hour
 
     if t == 12
-      return "#{random_tweet(Greeting, :greeting)}。#{jpn_wday}曜日で四男の慧です。"
+      return "#{random_word(Greeting, :greeting)}。#{jpn_wday}曜日で四男の慧です。"
     end
 
-    random_tweet(Tweet, :tweet)
+    random_word(Tweet, :tweet)
   end
 
   private
@@ -32,18 +31,18 @@ class KeiBot
     jpn_wday[i]
   end
 
-  def random_tweet(model, accessor)
-    selected_tweet = model.where(:done => false).sample
+  def random_word(model, accessor)
+    selected = model.where(:done => false).sample
 
-    unless selected_tweet
+    unless selected
       reset_tweets
-      random_tweet(model, accessor)
+      random_word(model, accessor)
     end
 
-    selected_tweet.done = true
-    selected_tweet.save
+    selected.done = true
+    selected.save
     
-    selected_tweet.send(accessor)
+    selected.send(accessor)
   end
 
   def reset_tweets
