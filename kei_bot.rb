@@ -3,14 +3,15 @@
 require 'twitter'
 require './tweet.rb'
 require './greeting.rb'
+require './config/local_env.rb' unless ENV['OAUTH_TOKEN_SECRET']
 
 class KeiBot
   def initialize
     Twitter.configure do |config|
-      config.consumer_key       = "gflLuSaA3yCQrU4L4ClQ"
-      config.consumer_secret    = "O9UQaU8HXNI3VoxpflbAARO6IiUAX5xSEdE0GcU8I"
-      config.oauth_token        = "281437223-hR50MScpB5jMl14GpIpY52nOOs5rgN3bXMngt2fL"
-      config.oauth_token_secret = "62FeSlA8YboQ5hcf62F4Hn5uia4tUY5VxeIljO90"
+      config.consumer_key       = ENV['CONSUMER_KEY']
+      config.consumer_secret    = ENV['CONSUMER_SECRET']
+      config.oauth_token        = ENV['OAUTH_TOKEN']
+      config.oauth_token_secret = ENV['OAUTH_TOKEN_SECRET']
     end
   end
 
@@ -51,11 +52,11 @@ class KeiBot
 end
 
 kei = KeiBot.new
-=begin
+
 begin
   Twitter.update(kei.tweet)
 rescue
   retry
 end
-=end
-p kei.tweet
+
+#p kei.tweet
