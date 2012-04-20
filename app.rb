@@ -1,3 +1,3 @@
 get '/' do
-  'hoge'
+  'Hello, World!'
 end
