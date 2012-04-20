@@ -36,7 +36,7 @@ class KeiBot
 
     unless selected
       reset_tweets
-      random_word(model, accessor)
+      return random_word(model, accessor)
     end
 
     selected.done = true
@@ -51,11 +51,11 @@ class KeiBot
 end
 
 kei = KeiBot.new
-
+=begin
 begin
   Twitter.update(kei.tweet)
 rescue
   retry
 end
-
-#p kei.tweet
+=end
+p kei.tweet
