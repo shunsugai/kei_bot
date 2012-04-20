@@ -1,0 +1,4 @@
+== Welcome to kei_bot
+
+うちの弟の珍妙な名言をつぶやくためのTwitterBotです。
+link:https://twitter.com/#!/sugaikei_bot
