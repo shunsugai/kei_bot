@@ -35,14 +35,14 @@ class KeiBot
   def random_tweet(model)
     selected_tweet = model.where(:done => false).sample
 
-    if selected_tweet
-      selected_tweet.done = true
-      selected_tweet.save
-      tweet = selected_tweet.tweet
-    else
+    unless selected_tweet
       reset_tweets
       random_tweet(model)
     end
+
+    selected_tweet.done = true
+    selected_tweet.save
+    return selected_tweet.tweet
   end
 
   def reset_tweets
