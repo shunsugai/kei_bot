@@ -15,8 +15,6 @@ class KeiBot
   end
 
   def tweet
-    reset_tweets if all_done?
-
     t = Time.now.hour
 
     if t == 12
@@ -36,14 +34,15 @@ class KeiBot
 
   def random_tweet(model)
     selected_tweet = model.where(:done => false).sample
-    selected_tweet.done = true
-    selected_tweet.save
-    tweet = selected_tweet.tweet
-  end
 
-  def all_done?
-    tweets_done = Tweet.where(:done => false)
-    tweets_done.size == 0 ? true : false
+    if selected_tweet
+      selected_tweet.done = true
+      selected_tweet.save
+      tweet = selected_tweet.tweet
+    else
+      reset_tweets
+      random_tweet(model)
+    end
   end
 
   def reset_tweets
