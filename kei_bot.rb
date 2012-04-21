@@ -25,12 +25,6 @@ class KeiBot
   end
 
   private
-  def jpn_wday
-    jpn_wday = %w[日 月 火 水 木 金 土]
-    i = Time.new.wday
-    jpn_wday[i]
-  end
-
   def random_word(model, accessor)
     selected = model.where(:done => false).sample
 
@@ -47,6 +41,12 @@ class KeiBot
 
   def reset_tweets
     Tweet.where(:done => true).update_all(:done => false)
+  end
+
+  def jpn_wday
+    jpn_wday = %w[日 月 火 水 木 金 土]
+    i = Time.new.wday
+    jpn_wday[i]
   end
 end
 
