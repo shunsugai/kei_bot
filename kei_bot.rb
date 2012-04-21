@@ -50,12 +50,7 @@ class KeiBot
   end
 end
 
-kei = KeiBot.new
-=begin
-begin
-  Twitter.update(kei.tweet)
-rescue
-  retry
+if $0 == __FILE__
+  kei = KeiBot.new
+  p kei.tweet
 end
-=end
-p kei.tweet
