@@ -29,7 +29,7 @@ class KeiBot
     selected = model.where(:done => false).sample
 
     unless selected
-      reset_tweets
+      reset_tweets(model)
       return random_word(model, accessor)
     end
 
@@ -39,8 +39,8 @@ class KeiBot
     selected.send(accessor)
   end
 
-  def reset_tweets
-    Tweet.where(:done => true).update_all(:done => false)
+  def reset_tweets(model)
+    model.where(:done => true).update_all(:done => false)
   end
 
   def jpn_wday
